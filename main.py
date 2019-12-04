@@ -5,24 +5,22 @@ __date__ = "2019/11/22"
 __author__ = "zhaojm"
 
 import ast, astunparse
-
-func_def = \
-    """
-    def add(x, y):
-        return x + y
-    print(add(3, 5))
-    """
-
-# r_node = ast.parse(func_def)
-# print(ast.dump(r_node))
-# print(astunparse.dump(r_node))
-# print(astunparse.unparse(r_node))
-
+from visitor import CodeVisitor
 import codecs
 
-r_node = ast.parse(file('test.py').read())
+r_node = ast.parse(file('conf.py').read())
 
-print(type(r_node))
-print(ast.dump(r_node))
+visitor = CodeVisitor()
+visitor.visit(r_node)
+# print(type(r_node))
+# print(ast.dump(r_node))
 print(astunparse.dump(r_node))
-print(astunparse.unparse(r_node))
+s = astunparse.unparse(r_node)
+print(s)
+
+with codecs.open('conf2.py', mode='w', encoding='utf8') as f:
+    f.write(s)
+
+
+
+# exec compile(r_node, '<string>', 'exec')

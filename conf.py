@@ -7,4 +7,10 @@ __author__ = "zhaojm"
 
 class Conf(object):
     def __init__(self):
-        self.data = []
+        self.A = [1, 2, Conf()]
+        self.B = 2
+        self.C = '1'
+        pass
+
+
+c = Conf()
